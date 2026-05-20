@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#2563eb">
+  <title>English Vocabulary Interactive</title>
+  <link rel="manifest" href="manifest.json?v=6">
+  <link rel="stylesheet" href="styles.css?v=6">
+</head>
+<body>
+<header>
+  <div>
+    <h1>English Vocabulary</h1>
+    <p>Mas Camarena · Units 6, 7 y 9</p>
+  </div>
+  <button id="installBtn" hidden>Instalar</button>
+</header>
+
+<main>
+  <section class="panel intro">
+    <h2>Ficha interactiva</h2>
+    <p><b>Ejercicio 1:</b> pulsa <b>Escuchar inglés</b>, elige velocidad <b>normal</b> o <b>lenta</b>, y toca una imagen. La app dirá la palabra en inglés y después en español.</p>
+    <p><b>Ejercicio 2:</b> la app pronuncia una palabra en inglés, el niño selecciona la imagen correcta y termina escribiendo la palabra. Las palabras no se muestran en las imágenes hasta comprobar la escritura.</p>
+  </section>
+
+  <nav class="tabs" aria-label="Ejercicios">
+    <button class="tab active" data-view="cards" type="button">Ejercicio 1</button>
+    <button class="tab" data-view="listen" type="button">Ejercicio 2</button>
+    <select id="unitFilter" aria-label="Filtrar por unidad">
+      <option value="all">Todas las páginas</option>
+      <option value="6">Unit 6</option>
+      <option value="7">Unit 7</option>
+      <option value="9">Unit 9</option>
+    </select>
+  </nav>
+
+  <section id="cardsView">
+    <div class="toolbar panel smallPanel">
+      <button id="enableAudio" class="primary bigButton" type="button">Escuchar inglés</button>
+      <div class="speedGroup" role="group" aria-label="Velocidad de pronunciación">
+        <button class="speedBtn active" data-speed="normal" type="button">Normal</button>
+        <button class="speedBtn" data-speed="slow" type="button">Lento</button>
+      </div>
+      <span id="audioStatus">Pulsa para activar los iconos.</span>
+    </div>
+    <div id="grid" class="grid locked"></div>
+  </section>
+
+  <section id="listenView" hidden>
+    <div class="game panel">
+      <div class="score">
+        <span>Aciertos: <b id="ok">0</b></span>
+        <span>Intentos: <b id="tries">0</b></span>
+      </div>
+
+      <div class="challengeBar">
+        <button id="nextWord" class="primary bigButton" type="button">Next word</button>
+        <button id="repeatChallenge" type="button" disabled>Repetir palabra</button>
+        <div class="speedGroup" role="group" aria-label="Velocidad de pronunciación">
+          <button class="speedBtn active" data-speed="normal" type="button">Normal</button>
+          <button class="speedBtn" data-speed="slow" type="button">Lento</button>
+        </div>
+      </div>
+
+      <p id="gameMsg" class="message">Pulsa “Next word”.</p>
+
+      <div id="choiceGrid" class="grid compact hiddenWords" aria-live="polite"></div>
+
+      <div id="typeBox" class="typeBox" hidden>
+        <label for="typedWord">Escribe la palabra en inglés:</label>
+        <input id="typedWord" autocomplete="off" autocapitalize="none" spellcheck="false" inputmode="text">
+        <button id="checkTyped" class="primary" type="button">Comprobar</button>
+
+        <div id="resultCard" class="resultCard" hidden>
+          <span class="unit" id="resultUnit">Unit —</span>
+          <span class="icon" id="resultIcon" aria-hidden="true">—</span>
+          <span class="word" id="resultWord">—</span>
+        </div>
+
+        <div id="matchPanel" class="matchPanel" aria-live="polite" hidden>
+          <div>Palabra correcta: <b id="correctWord">—</b></div>
+          <div>Has escrito: <b id="writtenWord">—</b></div>
+          <div>Coincidencia: <b id="matchResult">Pendiente</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="app.js?v=6"></script>
+</body>
+</html>
